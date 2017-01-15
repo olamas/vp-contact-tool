@@ -1,0 +1,4 @@
+--- 
+server: 
+  contextPath: /vp-contact-tool
+  port: 8080

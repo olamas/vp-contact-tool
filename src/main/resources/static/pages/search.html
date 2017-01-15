@@ -1,0 +1,54 @@
+<div class="generic-container">
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading"><span class="lead">{{header}}</span></div>
+         <div class="panel-body">
+            <div class="formcontainer">
+            	<div class="alert alert-success" role="alert" ng-if="successMsg">{{successMsg}}</div>
+                <div class="alert alert-danger" role="alert" ng-if="errorMsg">{{errorMsg}}</div>
+                <form name="searchForm" class="form-horizontal">                    
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label class="col-md-2 control-lable" for="searchCode">{{searchLabel}}</label>
+                            <div class="col-md-7">
+                                <select name="repeatSelect" id="selectOutlets" ng-model="selectedOutlet"   ng-options="item.name for item in items" ng-change="search()" >
+    							</select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+			</div>
+        </div>    
+    </div>
+      <div class="panel panel-default" ng-show="contacts">
+        <!-- Default panel contents -->
+        <div class="panel-heading"><span class="lead">List of Contacts </span></div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Contact Name</th>
+                        <th>Contact Title</th>
+                        <th>Outlet name</th>
+                        <th>Contact Profile</th>
+                        <th width="100"></th>
+                        <th width="100"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="item  in contacts">
+                        <td>{{item.firstName}} {{item.lastName}}</td>
+                        <td>{{item.title}}</td>
+                        <td>{{searchOutlet}}</td>
+                        <td>{{item.profile}}</td>
+                        <td><button type="button" ng-click="ctrl.editUser(u.id)" class="btn btn-success custom-width">Edit</button></td>
+                        <td><button type="button" ng-click="ctrl.removeUser(u.id)" class="btn btn-danger custom-width">Remove</button></td>
+                    </tr>
+                    </tbody>
+                </table>      
+            </div>
+        </div>
+    </div>
+    
+ </div>   
