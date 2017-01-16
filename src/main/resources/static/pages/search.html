@@ -24,29 +24,50 @@
         <!-- Default panel contents -->
         <div class="panel-heading"><span class="lead">List of Contacts </span></div>
         <div class="panel-body">
-            <div class="table-responsive">
-                <table class="table table-hover">
+            <div>
+                <table class="table table-hover table-condensed table-striped">
                     <thead>
                     <tr>
-                        <th>Contact Name</th>
-                        <th>Contact Title</th>
+                        <th><a href="" ng-click="orderByField='firstName'; reverseSort = !reverseSort">Contact Name</a></th>
+                        <th><a href="" ng-click="orderByField='title'; reverseSort = !reverseSort">Contact Title</a></th>
                         <th>Outlet name</th>
-                        <th>Contact Profile</th>
+                        <th><a href="" ng-click="orderByField='profile'; reverseSort = !reverseSort">Contact Profile</a></th>
                         <th width="100"></th>
                         <th width="100"></th>
                     </tr>
                     </thead>
+                    <tfoot>
+	                    <td colspan="10">	                        
+	                        <div class="pull-right" >
+	                            <ul class="pagination">
+	                                <li ng-class="{disabled: currentPage == 0}">
+	                                    <a href ng-click="prevPage()">« Prev</a>
+	                                </li>
+	                                
+	                                <li ng-repeat="n in range(pagedContacts.length, currentPage, currentPage + gap) "
+                                    ng-class="{active: n == currentPage}"
+                                ng-click="setPage()">
+                                    <a href ng-bind="n + 1">1</a>
+                                </li>
+	                                
+	                                <li ng-class="{disabled: currentPage == pagedContacts.length - 1}">
+	                                    <a href ng-click="nextPage()">Next »</a>
+	                                </li>
+	                            </ul>
+	                        </div>
+	                    </td>
+	                </tfoot>
                     <tbody>
-                    <tr ng-repeat="item  in contacts">
+                    <tr ng-repeat="item  in pagedContacts[currentPage] | filter: searchKeyword | orderBy:orderByField:reverseSort">
                         <td>{{item.firstName}} {{item.lastName}}</td>
                         <td>{{item.title}}</td>
                         <td>{{searchOutlet}}</td>
                         <td>{{item.profile}}</td>
-                        <td><button type="button" ng-click="ctrl.editUser(u.id)" class="btn btn-success custom-width">Edit</button></td>
-                        <td><button type="button" ng-click="ctrl.removeUser(u.id)" class="btn btn-danger custom-width">Remove</button></td>
+                        <td><button type="button"  class="btn btn-success custom-width">Edit</button></td>
+                        <td><button type="button"  class="btn btn-danger custom-width">Remove</button></td>
                     </tr>
                     </tbody>
-                </table>      
+                </table>     
             </div>
         </div>
     </div>
